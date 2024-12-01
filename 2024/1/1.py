@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 file = open("input.txt")
 a, b = [], []
 for f in file:
@@ -31,9 +33,18 @@ def mergesort(arr):
 a = mergesort(a)
 b = mergesort(b)
 
-# count the distance
+# count the distance and fill map
 distance = 0
-for i in range(len(a)):
+map = defaultdict(int)
+for i in range(len(b)):
     distance += abs(int(a[i]) - int(b[i]))
+    val = int(b[i])
+    map[int(b[i])] += 1
 
 print(distance)
+
+score = 0
+for i in range(len(a)):
+    score += int(a[i]) * map[int(a[i])]
+
+print(score)
